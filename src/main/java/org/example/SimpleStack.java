@@ -43,7 +43,11 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item peek() throws EmptyStackException {
-        return elements.getLast();
+        try {
+            return elements.getLast();
+        } catch (NoSuchElementException e) {
+            throw new EmptyStackException();
+        }
     }
 
     /**
