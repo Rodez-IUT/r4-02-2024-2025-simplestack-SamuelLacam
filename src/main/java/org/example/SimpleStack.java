@@ -1,12 +1,22 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
 public class SimpleStack implements Stack {
+
+    private ArrayList<Item> elements;
+
+    public SimpleStack() {
+        elements = new ArrayList<>();
+    }
+
     /**
      * Tests if this stack is empty
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return elements.isEmpty();
     }
 
     /**
@@ -14,7 +24,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public int getSize() {
-        return 0;
+        return elements.size();
     }
 
     /**
@@ -25,7 +35,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public void push(Item item) {
-
+        elements.add(item);
     }
 
     /**
@@ -33,7 +43,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item peek() throws EmptyStackException {
-        return null;
+        return elements.getLast();
     }
 
     /**
@@ -44,6 +54,10 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item pop() throws EmptyStackException {
-        return null;
+        try {
+            return elements.removeLast();
+        } catch (NoSuchElementException e) {
+            throw new EmptyStackException();
+        }
     }
 }
