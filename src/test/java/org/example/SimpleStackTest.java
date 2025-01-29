@@ -50,7 +50,7 @@ class SimpleStackTest {
     }
 
     @Test
-    @DisplayName("Test the pop of the stack ")
+    @DisplayName("Test the pop of an stack contains one element")
     public void testPop() throws EmptyStackException {
         // Given an empty stack with one item
         Stack stack = new SimpleStack();
@@ -65,6 +65,32 @@ class SimpleStackTest {
 
         // the last added item and the removed item are the same
         assertEquals(item, removeItem);
+    }
+
+    @Test
+    @DisplayName("Test the pop of an stack contains several element")
+    public void testPopSeveralElements() throws EmptyStackException {
+        // Given an stack which contains several elements
+        Stack stack = new SimpleStack();
+        Item item1 = new SimpleItem();
+        Item item2 = new SimpleItem();
+        stack.push(item1);
+        stack.push(item2);
+
+        // When we remove the last item
+        Item removeItem = stack.pop();
+
+        //Then the stack is not empty
+        assertFalse(stack.isEmpty());
+
+        // the stack contains one element now
+        assertEquals(1, stack.getSize());
+
+        // the last added item and the removed item are the same
+        assertEquals(item2, removeItem);
+
+        // the first added item and the removed item are different
+        assertNotEquals(item1, removeItem);
     }
 
     @Test
